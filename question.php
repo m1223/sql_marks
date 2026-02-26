@@ -121,7 +121,7 @@ function get_question_mark($qid)
         </div>
     </div>
 </nav>
-<h1>SQL 34 Practice Questions with Dropdown Answers</h1>
+<h1>SQL 34 Practice Questions</h1>
 
 <h2>📘 Database Table Structure & Sample Data (10 Records)</h2>
 
