@@ -41,7 +41,9 @@ while($row = $q->fetch_assoc()){
                 <li class="nav-item">
                     <a class="nav-link" href="question.php">📘 Questions</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link active" href="keywords.php">🔑  Keywords</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="students.php">👨‍🎓 Students</a>
                 </li>
