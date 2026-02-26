@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 25, 2026 at 10:00 AM
--- Server version: 8.0.30
+-- Generation Time: Feb 26, 2026 at 01:41 AM
+-- Server version: 10.3.35-MariaDB-log
 -- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `sql_questions` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `question` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `answer` text COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -81,8 +81,8 @@ INSERT INTO `sql_questions` (`id`, `question`, `answer`) VALUES
 --
 
 CREATE TABLE `students` (
-  `id` int NOT NULL,
-  `roll` int DEFAULT NULL,
+  `id` int(11) NOT NULL,
+  `roll` int(11) DEFAULT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -91,7 +91,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `roll`, `name`) VALUES
-(1, 1, 'Rahim'),
+(1, 1, 'Rahim1'),
 (2, 2, 'Karim'),
 (3, 3, 'Sakib'),
 (4, 4, 'Nusrat'),
@@ -100,7 +100,27 @@ INSERT INTO `students` (`id`, `roll`, `name`) VALUES
 (7, 7, 'Lima'),
 (8, 8, 'Hasan'),
 (9, 9, 'Ritu'),
-(10, 10, 'Arif');
+(10, 10, 'Arif'),
+(11, 11, 'Sami'),
+(12, 12, 'Rana'),
+(13, 13, 'Tania'),
+(14, 14, 'Fahim'),
+(15, 15, 'Nabila'),
+(16, 16, 'Shahin'),
+(17, 17, 'Mousumi'),
+(18, 18, 'Rakib'),
+(19, 19, 'Jannat'),
+(20, 20, 'Sabbir'),
+(21, 21, 'Parvez'),
+(22, 22, 'Laila'),
+(23, 23, 'Shakil'),
+(24, 24, 'Anika'),
+(25, 25, 'Farhan'),
+(26, 26, 'Raisa'),
+(27, 27, 'Imran'),
+(28, 28, 'Samira'),
+(29, 29, 'Monir'),
+(30, 30, 'Taslima');
 
 -- --------------------------------------------------------
 
@@ -109,11 +129,11 @@ INSERT INTO `students` (`id`, `roll`, `name`) VALUES
 --
 
 CREATE TABLE `student_question_marks` (
-  `id` int NOT NULL,
-  `student_id` int NOT NULL,
-  `question_id` int NOT NULL,
-  `marks` int DEFAULT '0',
-  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `marks` int(11) DEFAULT 0,
+  `date` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -125,7 +145,8 @@ INSERT INTO `student_question_marks` (`id`, `student_id`, `question_id`, `marks`
 (10, 1, 3, 2, '2026-02-25 09:19:58'),
 (11, 2, 3, 2, '2026-02-25 09:19:58'),
 (15, 5, 1, 2, '2026-02-25 09:20:23'),
-(16, 6, 1, 2, '2026-02-25 09:20:23');
+(16, 6, 1, 2, '2026-02-25 09:20:23'),
+(18, 3, 12, 5, '2026-02-26 00:58:25');
 
 --
 -- Indexes for dumped tables
@@ -160,19 +181,19 @@ ALTER TABLE `student_question_marks`
 -- AUTO_INCREMENT for table `sql_questions`
 --
 ALTER TABLE `sql_questions`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `student_question_marks`
 --
 ALTER TABLE `student_question_marks`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
