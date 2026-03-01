@@ -79,7 +79,7 @@
             <th>Student</th>
             <?php
             // fetch all questions
-            $questions = $conn->query("SELECT * FROM sql_questions ORDER BY id ASC");
+            $questions = $conn->query("SELECT * FROM sql_questions  WHERE id > 34 ORDER BY id ASC");
             $q_array = [];
             while ($q = $questions->fetch_assoc()) {
                 $q_array[] = $q;

@@ -161,7 +161,7 @@ function get_question_mark($qid)
 <hr style="margin:20px 0;">
 
 <?php
-$sql = "SELECT * FROM sql_questions ORDER BY id ASC";
+$sql = "SELECT * FROM sql_questions WHERE id > 34 ORDER BY id ASC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
