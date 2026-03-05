@@ -3,158 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduDB | Relationship Flow</title>
+    <title>EduDB | Projector-Ready Relationship Flow</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
-
-        /* Relationship Line Animation */
-        .flow-line {
-            height: 2px;
-            background: linear-gradient(90deg, #3b82f6 0%, #9333ea 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .flow-line::after {
-            content: "";
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, #fff, transparent);
-            animation: flow 2s infinite;
-        }
-        @keyframes flow {
-            0% { left: -100%; }
-            100% { left: 100%; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc; /* Light Slate Gray */
+            color: #1e293b; /* Deep Navy for maximum readability */
         }
 
-        .db-node {
+        /* Projector-Friendly Node Styling */
+        .table-box {
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
-            border: 1px solid #e2e8f0;
         }
-        .db-node:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            border-color: #3b82f6;
+        .table-box:hover {
+            border-color: #2563eb;
+            transform: scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1);
         }
 
-        .pulse-dot {
-            width: 8px; height: 8px;
-            background: #3b82f6;
-            border-radius: 50%;
-            position: absolute;
-            right: -4px; top: 50%;
-            transform: translateY(-50%);
-            box-shadow: 0 0 0 rgba(59, 130, 246, 0.4);
-            animation: pulse 2s infinite;
+        /* Animation for Data Flow */
+        @keyframes flow {
+            0% { border-left-color: #e2e8f0; }
+            50% { border-left-color: #2563eb; }
+            100% { border-left-color: #e2e8f0; }
         }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        .active-flow {
+            border-left: 6px solid #2563eb;
+            animation: flow 3s infinite;
         }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-node { animation: float 5s ease-in-out infinite; }
+
+        .pk-tag { background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; border: 1px solid #fde68a; }
+        .fk-tag { background: #dbeafe; color: #1e40af; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 6px; border: 1px solid #bfdbfe; }
     </style>
 </head>
-<body class="p-8">
+<body class="p-8 md:p-16">
 
-<div class="max-w-6xl mx-auto">
-    <div class="text-center mb-12">
-        <h1 class="text-3xl font-extrabold text-slate-900">Entity Relationship Flow</h1>
-        <p class="text-slate-500 italic">Visualizing how your PHP/Laravel database tables connect</p>
+<div class="max-w-7xl mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-16 border-b-4 border-blue-600 pb-8">
+        <div>
+            <span class="bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4 inline-block">Database Mapping</span>
+            <h1 class="text-5xl font-extrabold tracking-tight text-slate-900">Relational <span class="text-blue-600">Schema Flow</span></h1>
+            <p class="text-slate-500 text-lg font-medium mt-2 italic">Optimized for Projector & Large Screen Presentation</p>
+        </div>
+        <a href="school.php" class="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold flex items-center gap-3 hover:bg-blue-600 transition-all shadow-lg">
+            <i class="fas fa-arrow-left"></i> Dashboard
+        </a>
     </div>
 
-    <div class="relative flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
 
-        <div class="flex flex-col gap-6 w-full md:w-64">
-            <div class="bg-white p-4 rounded-xl shadow-sm db-node relative">
-                <div class="flex items-center gap-3 mb-2 text-blue-600 font-bold text-sm">
-                    <i class="fas fa-history"></i> Sessions
+        <div class="space-y-10">
+            <div class="text-center font-black text-slate-400 uppercase tracking-widest text-sm mb-4">Foundation</div>
+
+            <div class="table-box p-8 float-node active-flow">
+                <h3 class="text-blue-600 font-extrabold flex items-center gap-3 mb-6 text-xl">
+                    <i class="fas fa-clock"></i> Sessions
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between font-bold border-b pb-2"><span>id</span> <span class="pk-tag">PK</span></div>
+                    <div class="flex justify-between text-slate-600"><span>name</span> <span class="text-xs font-mono uppercase">Varchar</span></div>
                 </div>
-                <div class="text-[14px] text-slate-400 font-mono">PK: id</div>
-                <div class="pulse-dot"></div>
             </div>
 
-            <div class="bg-white p-4 rounded-xl shadow-sm db-node relative">
-                <div class="flex items-center gap-3 mb-2 text-purple-600 font-bold text-sm">
-                    <i class="fas fa-layer-group"></i> Classes
+            <div class="table-box p-8 float-node active-flow" style="animation-delay: 1s;">
+                <h3 class="text-purple-600 font-extrabold flex items-center gap-3 mb-6 text-xl">
+                    <i class="fas fa-university"></i> Classes
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between font-bold border-b pb-2"><span>id</span> <span class="pk-tag">PK</span></div>
+                    <div class="flex justify-between text-slate-600"><span>name</span> <span class="text-xs font-mono uppercase">Varchar</span></div>
                 </div>
-                <div class="text-[14px] text-slate-400 font-mono">PK: id</div>
-                <div class="pulse-dot"></div>
             </div>
         </div>
 
-        <div class="hidden md:flex flex-col gap-20 w-24">
-            <div class="flow-line w-full"></div>
-            <div class="flow-line w-full"></div>
-        </div>
+        <div class="space-y-10">
+            <div class="text-center font-black text-slate-400 uppercase tracking-widest text-sm mb-4">Structure</div>
 
-        <div class="flex flex-col gap-6 w-full md:w-72">
-            <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-purple-500 db-node relative">
-                <h3 class="font-bold text-slate-800 text-sm mb-3">Sections</h3>
-                <ul class="text-[14px] space-y-2 text-slate-500">
-                    <li class="flex justify-between"><span>id</span> <span class="text-blue-500">PK</span></li>
-                    <li class="flex justify-between font-bold text-slate-700"><span>class_id</span> <span class="text-purple-500 italic">FK → Classes</span></li>
-                </ul>
-                <div class="pulse-dot"></div>
-            </div>
-
-            <div class="bg-white p-5 rounded-xl shadow-md border-l-4 border-emerald-500 db-node relative">
-                <h3 class="font-bold text-slate-800 text-sm mb-3">Subjects</h3>
-                <ul class="text-[14px] space-y-2 text-slate-500">
-                    <li class="flex justify-between"><span>id</span> <span class="text-blue-500">PK</span></li>
-                    <li class="flex justify-between"><span>name</span> <span>VARCHAR</span></li>
-                </ul>
-                <div class="pulse-dot"></div>
-            </div>
-        </div>
-
-        <div class="hidden md:flex flex-col gap-20 w-24">
-            <div class="flow-line w-full"></div>
-        </div>
-
-        <div class="flex flex-col gap-6 w-full md:w-80">
-            <div class="bg-slate-900 p-6 rounded-2xl shadow-2xl db-node relative border-2 border-blue-500/30">
-                <div class="flex items-center gap-2 text-blue-400 font-bold mb-4">
-                    <i class="fas fa-user-graduate"></i> Students (Central Hub)
-                </div>
-                <div class="space-y-3">
-                    <div class="bg-slate-800 p-2 rounded flex justify-between items-center">
-                        <span class="text-xs text-slate-300">session_id</span>
-                        <span class="text-[14px] bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded">FK</span>
+            <div class="table-box p-8 border-l-8 border-l-amber-500">
+                <h3 class="text-amber-600 font-extrabold mb-6 text-xl">Sections & Subjects</h3>
+                <div class="space-y-6">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <span class="block font-bold text-slate-800 mb-2 underline">Sections</span>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-blue-700">class_id</span>
+                            <span class="fk-tag">FK (classes.id)</span>
+                        </div>
                     </div>
-                    <div class="bg-slate-800 p-2 rounded flex justify-between items-center">
-                        <span class="text-xs text-slate-300">class_id</span>
-                        <span class="text-[14px] bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded">FK</span>
-                    </div>
-                    <div class="bg-slate-800 p-2 rounded flex justify-between items-center">
-                        <span class="text-xs text-slate-300">section_id</span>
-                        <span class="text-[14px] bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded">FK</span>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <span class="block font-bold text-slate-800 mb-2 underline">Subjects</span>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold text-blue-700">class_id</span>
+                            <span class="fk-tag">FK (classes.id)</span>
+                        </div>
                     </div>
                 </div>
-                <div class="pulse-dot !bg-purple-500"></div>
             </div>
 
-            <div class="bg-amber-50 p-6 rounded-2xl shadow-lg border-2 border-dashed border-amber-200 db-node relative">
-                <div class="flex items-center gap-2 text-amber-700 font-bold mb-4">
-                    <i class="fas fa-chart-bar"></i> Marks (End Result)
-                </div>
-                <div class="space-y-1">
-                    <p class="text-[14px] text-slate-500 italic uppercase font-bold">Consolidates Data From:</p>
-                    <p class="text-xs text-slate-700 font-medium font-mono">• students.id</p>
-                    <p class="text-xs text-slate-700 font-medium font-mono">• exams.id</p>
-                    <p class="text-xs text-slate-700 font-medium font-mono">• subjects.id</p>
+            <div class="table-box p-8 border-l-8 border-l-rose-500">
+                <h3 class="text-rose-600 font-extrabold mb-6 text-xl">Exams</h3>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center text-sm font-bold">
+                        <span>session_id</span> <span class="fk-tag">FK</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm font-bold">
+                        <span>class_id</span> <span class="fk-tag">FK</span>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <div class="space-y-10">
+            <div class="text-center font-black text-slate-400 uppercase tracking-widest text-sm mb-4">Data Hub</div>
+
+            <div class="table-box p-8 border-4 border-blue-600 shadow-2xl">
+                <h2 class="text-2xl font-black text-slate-900 mb-6 flex items-center gap-3">
+                    <i class="fas fa-graduation-cap text-blue-600"></i> Students
+                </h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg border border-blue-100">
+                        <span class="font-bold">session_id</span>
+                        <span class="fk-tag">FK</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg border border-blue-100">
+                        <span class="font-bold">class_id</span>
+                        <span class="fk-tag">FK</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg border border-blue-100">
+                        <span class="font-bold">section_id</span>
+                        <span class="fk-tag">FK</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-box p-8 bg-blue-600 text-white border-none shadow-xl">
+                <h3 class="text-white font-black mb-6 text-xl uppercase tracking-tighter italic">Result Processing</h3>
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between text-xs font-bold border-b border-blue-400 pb-2">
+                        <span>student_id</span> <span>FK</span>
+                    </div>
+                    <div class="flex justify-between text-xs font-bold border-b border-blue-400 pb-2">
+                        <span>exam_id</span> <span>FK</span>
+                    </div>
+                    <div class="flex justify-between text-xs font-bold border-b border-blue-400 pb-2">
+                        <span>subject_id</span> <span>FK</span>
+                    </div>
+                </div>
+                <div class="text-center py-4 bg-white/10 rounded-xl">
+                    <span class="text-4xl font-black tracking-tighter">MARKS %</span>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="mt-16 flex justify-center gap-8 text-xs font-bold text-slate-400 uppercase tracking-widest">
-        <div class="flex items-center gap-2"><span class="w-3 h-3 bg-blue-500 rounded"></span> Primary Key</div>
-        <div class="flex items-center gap-2"><span class="w-3 h-3 bg-purple-500 rounded"></span> Foreign Key</div>
-        <div class="flex items-center gap-2"><span class="w-3 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></span> Relationship Flow</div>
+    <div class="mt-20 p-8 bg-white border-2 border-slate-200 rounded-3xl flex flex-wrap justify-around gap-8">
+        <div class="flex items-center gap-3">
+            <div class="w-6 h-6 bg-blue-600 rounded-lg"></div>
+            <span class="font-bold text-slate-700">Primary Flow Path</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <div class="px-3 py-1 bg-fef3c7 border border-fde68a text-92400e font-black text-xs rounded">PK</div>
+            <span class="font-bold text-slate-700">Unique Identifier</span>
+        </div>
+        <div class="flex items-center gap-3">
+            <div class="px-3 py-1 bg-dbeafe border border-bfdbfe text-1e40af font-black text-xs rounded">FK</div>
+            <span class="font-bold text-slate-700">Relational Bridge</span>
+        </div>
     </div>
 </div>
 
